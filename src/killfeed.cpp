@@ -67,7 +67,7 @@ private:
 
     void loadConfig()
     {
-        std::string configPath = getDataFolder() + "/messages.txt";
+        auto configPath = getDataFolder() / "messages.txt";
 
         std::ifstream file(configPath);
         if (file.is_open()) {
@@ -94,7 +94,7 @@ private:
         rng.seed(std::random_device{}());
     }
 
-    void createDefaultConfig(const std::string &path)
+    void createDefaultConfig(const std::filesystem::path &path)
     {
         std::filesystem::create_directories(getDataFolder());
 
