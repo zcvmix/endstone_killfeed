@@ -1,83 +1,51 @@
-# Endstone C++ Example Plugin
+# Killfeed Plugin
 
-Welcome to the example C++ plugin for Endstone servers.
+Broadcasts custom death messages when players die.
 
-## Prerequisites
+## Build
 
-### Windows
-
-- Visual Studio 2017 or newer
-
-### Linux
-
-- Clang 15 or higher
-- libc++ installed
-
-## Structure Overview
-
+**Windows:**
 ```
-cpp-example-plugin/
-├── include/                      # Header files for the plugin
-│   ├── example_listener.h        # Header for the ExampleListener class
-│   ├── example_plugin.h          # Header for the ExamplePlugin class
-│   └── fibonacci_command.h       # Header for the FibonacciCommand class
-├── src/                          # Source files for the plugin
-│   └── example_plugin.cpp        # Source and metadata for the plugin
-├── .clang-format                 # Configuration for Clang format rules
-├── .gitignore                    # Git ignore rules
-├── CMakeLists.txt                # CMake configuration for building the plugin
-├── LICENSE                       # License details
-└── README.md                     # This file
+mkdir build
+cd build
+cmake ..
+cmake --build . --config Release
 ```
 
-## Getting Started
+**Linux:**
+```
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+cmake --build .
+```
 
-1. **Clone this Repository**
+## Install
 
-   ```bash
-   git clone https://github.com/EndstoneMC/cpp-example-plugin.git
-   ```
+Copy `endstone_killfeed.dll` (Windows) or `endstone_killfeed.so` (Linux) to your server's `plugins` folder.
 
-2. **Navigate to the Cloned Directory**
+## Config
 
-   ```bash
-   cd cpp-example-plugin
-   ```
+First run creates `plugins/killfeed/messages.txt`:
 
-3. **Build Your Plugin**
+```
+# Use {user} for player name
+# Lines with # are ignored
 
-   **Windows:**
-   ```shell
-   mkdir build
-   cd build
-   cmake ..
-   cmake --build . --config Release
-   ```
+§l§e{user}§r §cjust got reality-checked by PvP.
+§l§e{user}§r §cconfused confidence with skill.
+```
 
-   **Linux:**
-   ```shell
-   mkdir build
-   cd build
-   cmake -DCMAKE_BUILD_TYPE=Release ..
-   cmake --build .
-   ```
+Add more messages, one per line. Use `{user}` where the player's name should appear.
 
-   This process will compile your code and produce a shared library that Endstone servers can load.
+## Command
 
-   **Note: If you wish to build against a specific version of Endstone, you can modify the `GIT_TAG` in
-   the `CMakeLists.txt` file to point to the desired tag or commit.**
+`/killfeed reload` - Reload config (operator only)
 
-4. **Test Your Plugin**
+## Color Codes
 
-   Once built, copy the output binary `endstone_example_plugin.dll` (Windows) or `endstone_example_plugin.so` (Linux) to
-   the `plugins` directory of your Endstone server. Start the Endstone server and check the logs to ensure your plugin
-   loads and operates as expected.
-
-## Documentation
-
-For a deeper dive into the Endstone API and its functionalities, refer to the main
-Endstone [documentation](https://endstone.readthedocs.io) (WIP).
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+- `§l` = Bold
+- `§e` = Yellow
+- `§c` = Red
+- `§a` = Green
+- `§r` = Reset
