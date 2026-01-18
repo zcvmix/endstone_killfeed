@@ -2,24 +2,6 @@
 
 Broadcasts custom death messages when players die.
 
-## Build
-
-**Windows:**
-```
-mkdir build
-cd build
-cmake ..
-cmake --build . --config Release
-```
-
-**Linux:**
-```
-mkdir build
-cd build
-cmake -DCMAKE_BUILD_TYPE=Release ..
-cmake --build .
-```
-
 ## Install
 
 Copy `endstone_killfeed.dll` (Windows) or `endstone_killfeed.so` (Linux) to your server's `plugins` folder.
@@ -43,6 +25,7 @@ Add more messages, one per line. Use `{user}` where the player's name should app
 `/killfeed reload` - Reload config (operator only)
 
 ## Color Codes
+Support all Colors
 
 - `§l` = Bold
 - `§e` = Yellow
