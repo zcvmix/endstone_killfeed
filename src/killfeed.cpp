@@ -51,13 +51,18 @@ public:
 
     void onPlayerDeath(endstone::PlayerDeathEvent &event)
     {
-        auto &player = event.getPlayer();
-        std::string playerName = player.getName();
+        try {
+            auto &player = event.getPlayer();
+            std::string playerName = player.getName();
 
-        std::string message = getRandomMessage(playerName);
-        getServer().broadcastMessage(message);
+            std::string message = getRandomMessage(playerName);
+            getServer().broadcastMessage(message);
 
-        getLogger().info("Death message broadcasted for player: {}", playerName);
+            getLogger().info("Death message broadcasted for player: {}", playerName);
+        }
+        catch (const std::exception &e) {
+            getLogger().error("Error in onPlayerDeath: {}", e.what());
+        }
     }
 
 private:
